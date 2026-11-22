@@ -1,9 +1,11 @@
-import React from 'react'
+import { SignIn } from "@clerk/react";
 
 const Login = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <div className="w-full flex items-center justify-center">
+      <SignIn path="/login" routing="path" signUpUrl="/signup" />
+    </div>
+  );
+};
 
-export default Login
+export default Login;

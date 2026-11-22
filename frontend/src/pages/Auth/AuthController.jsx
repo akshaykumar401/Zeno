@@ -4,15 +4,15 @@ import { Outlet, Navigate } from "react-router-dom";
 const AuthController = () => {
   const { isUserLogin } = useAuth();
 
-  return (
-    <>{!isUserLogin ?
-      <div>
-        Login
-      </div>
-      :
-      <Navigate to="/" replace />}
-    </>
-  )
-}
+  if (isUserLogin) {
+    return <Navigate to="/" replace />;
+  }
 
-export default AuthController
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+      <Outlet />
+    </div>
+  );
+};
+
+export default AuthController;

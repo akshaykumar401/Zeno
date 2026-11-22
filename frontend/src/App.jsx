@@ -1,5 +1,4 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useState } from "react";
 import { useAuth } from "./hooks/CustomLoginHook.jsx";
 
 const App = () => {
@@ -13,7 +12,7 @@ const App = () => {
     <div>
       <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

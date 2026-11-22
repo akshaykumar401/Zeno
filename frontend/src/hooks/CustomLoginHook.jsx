@@ -1,15 +1,15 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
+import { useAuth as useClerkAuth, useUser, useClerk } from "@clerk/react";
 
 const AuthContext = createContext();
-const AuthProvider = ({ children }) => {
-  const [isUserLogin, setIsUserLogin] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000)
-  }, []);
+const AuthProvider = ({ children }) => {
+  const { isSignedIn, isLoaded, userId, sessionId, getToken } = useClerkAuth();
+  const { user } = useUser();
+  const { signOut } = useClerk();
+
+  const isUserLogin = Boolean(isSignedIn);
+  const isLoading = !isLoaded;
 
   // Getting if user is logged in or not
   const getIsUserLogin = () => {
@@ -17,8 +17,10 @@ const AuthProvider = ({ children }) => {
   };
 
   // Function for Toggling user to change the user Login -> Logout state
-  const toggleLoginUser = () => {
-    setIsUserLogin((prev) => !prev);
+  const toggleLoginUser = async () => {
+    if (isSignedIn) {
+      await signOut();
+    }
   };
 
   if (isLoading) {
@@ -33,7 +35,20 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isUserLogin, isLoading, getIsUserLogin, toggleLoginUser }}>
+    <AuthContext.Provider
+      value={{
+        isUserLogin,
+        isLoading,
+        isSignedIn: isUserLogin,
+        user,
+        userId,
+        sessionId,
+        getToken,
+        signOut,
+        getIsUserLogin,
+        toggleLoginUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
