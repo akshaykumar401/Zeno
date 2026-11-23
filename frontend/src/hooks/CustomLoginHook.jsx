@@ -25,10 +25,28 @@ const AuthProvider = ({ children }) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-50">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-4 border-slate-200 border-t-slate-900 rounded-full animate-spin"></div>
-          <span className="text-sm font-serif font-semibold text-slate-700 tracking-wide animate-pulse">Zeno</span>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#07080B] text-zinc-100 selection:bg-indigo-500/30">
+        <div className="relative flex flex-col items-center gap-6">
+          {/* Subtle Ambient Radial Glow */}
+          <div className="absolute -inset-6 bg-indigo-500/15 blur-3xl rounded-full pointer-events-none" />
+
+          {/* Spinner with Central Branded Emblem */}
+          <div className="relative flex items-center justify-center w-16 h-16">
+            <div className="absolute inset-0 rounded-full border-2 border-indigo-500/20 border-t-indigo-500 border-r-purple-500 animate-spin" />
+            <div className="w-11 h-11 rounded-xl overflow-hidden shadow-lg shadow-cyan-500/20 flex items-center justify-center ring-1 ring-white/10">
+              <img src="/zeno-logo.png" alt="Zeno" className="w-full h-full object-cover" />
+            </div>
+          </div>
+
+          {/* Brand Name & Animated Status */}
+          <div className="flex flex-col items-center gap-1.5 z-10">
+            <span className="text-xl font-bold tracking-tight text-white font-sans">
+              Zeno
+            </span>
+            <span className="text-xs text-zinc-500 font-medium tracking-wide animate-pulse">
+              Connecting to workspace...
+            </span>
+          </div>
         </div>
       </div>
     );

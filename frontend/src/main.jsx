@@ -8,7 +8,13 @@ import {
   AuthController,
   Home,
   Login,
-  SignUp
+  SignUp,
+  Explore,
+  Search,
+  Notification,
+  Message,
+  Profile,
+  CreatePost
 } from "./pages/index.js"
 import { ClerkProvider } from '@clerk/react'
 
@@ -26,6 +32,30 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/explore",
+        element: <Explore />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
+      },
+      {
+        path: "/notifications",
+        element: <Notification />,
+      },
+      {
+        path: "/messages",
+        element: <Message />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/create",
+        element: <CreatePost />,
       },
     ],
   },
